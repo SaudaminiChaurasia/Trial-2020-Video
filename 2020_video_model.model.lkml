@@ -34,6 +34,11 @@ explore: rental {
     relationship: one_to_one
     sql_on: ${film.film_id} = ${film_category.film_id} ;;
   }
+  join: category {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${film_category.category_id} = ${category.category_id} ;;
+  }
   join: customer {
     type: left_outer
     relationship: many_to_one

@@ -49,6 +49,16 @@ view: rental {
     sql: ${TABLE}.return_date ;;
   }
 
+  dimension: is_rental_returned {
+    case: {
+      when: {
+        sql: ${return_date} IS NOT NULL ;;
+        label: "Returned"
+      }
+      else: "With Customer"
+    }
+  }
+
   dimension: rental_return_in_days {
     type: number
     sql: DATE_DIFF(${return_date},${rental_date}, DAY) ;;
