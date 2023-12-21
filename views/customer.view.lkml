@@ -28,10 +28,24 @@ view: customer {
 
   measure: total_active {
     type: sum
-    sql: ${active} ;;  }
+    sql: ${active} ;;
+  }
+
   measure: average_active {
     type: average
-    sql: ${active} ;;  }
+    sql: ${active} ;;
+  }
+
+  measure: total_inactive {
+    type: number
+    sql: ${count} - ${total_active} ;;
+  }
+
+  measure: customer_retention {
+    type: number
+    sql: (${count} - ${total_inactive})/${count};;
+    value_format_name: percent_2
+  }
 
   dimension: address_id {
     type: number
@@ -77,10 +91,12 @@ view: customer {
     # hidden: yes
     sql: ${TABLE}.store_id ;;
   }
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {

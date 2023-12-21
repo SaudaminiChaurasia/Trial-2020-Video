@@ -63,6 +63,26 @@ view: rental {
     type: number
     sql: ${TABLE}.staff_id ;;
   }
+
+  measure: total_late_returns {
+    hidden: yes
+    type: sum
+    sql: if(${late_return},1,0) ;; #to add late returns
+  }
+
+  measure: total_returns {
+    hidden: yes
+    type: count_distinct
+    sql: ${return_date} ;;
+  }
+
+  measure: late_return_rate {
+    type: number
+    value_format_name: percent_2
+    sql: ${total_late_returns}/${total_returns} ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [detail*]
