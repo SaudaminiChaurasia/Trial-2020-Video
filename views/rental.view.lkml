@@ -39,7 +39,7 @@ view: rental {
 
   dimension_group: rental {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, month, month_name, quarter, year]
     sql: ${TABLE}.rental_date ;;
   }
 
@@ -47,6 +47,16 @@ view: rental {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.return_date ;;
+  }
+
+  dimension: rental_return_in_days {
+    type: number
+    sql: DATE_DIFF(${return_date},${rental_date}, DAY) ;;
+  }
+
+  dimension: late_return {
+    type:  yesno
+    sql: ${rental_return_in_days} > 7 ;;
   }
 
   dimension: staff_id {
@@ -61,13 +71,13 @@ view: rental {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	rental_id,
-	inventory.inventory_id,
-	customer.last_name,
-	customer.customer_id,
-	customer.first_name,
-	payment.count
-	]
+  rental_id,
+  inventory.inventory_id,
+  customer.last_name,
+  customer.customer_id,
+  customer.first_name,
+  payment.count
+  ]
   }
 
 }

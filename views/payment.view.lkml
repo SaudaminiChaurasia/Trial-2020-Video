@@ -28,10 +28,15 @@ view: payment {
 
   measure: total_amount {
     type: sum
-    sql: ${amount} ;;  }
+    sql: ${amount} ;;
+    value_format_name: usd
+    }
+
   measure: average_amount {
     type: average
-    sql: ${amount} ;;  }
+    sql: ${amount} ;;
+    value_format_name: usd
+    }
 
   dimension: customer_id {
     type: number

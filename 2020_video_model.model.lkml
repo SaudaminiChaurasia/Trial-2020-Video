@@ -18,7 +18,7 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
-explore:  rental{
+explore: rental {
   join: inventory {
     type: left_outer
     relationship: many_to_one

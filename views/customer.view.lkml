@@ -46,6 +46,11 @@ view: customer {
     sql: ${TABLE}.create_date ;;
   }
 
+  dimension: days_since_customer_created {
+    type: number
+    sql: DATE_DIFF(CURRENT_DATE(),${create_date}, DAY) ;;
+  }
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
@@ -80,13 +85,13 @@ view: customer {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	customer_id,
-	last_name,
-	first_name,
-	store.store_id,
-	rental.count,
-	payment.count
-	]
+  customer_id,
+  last_name,
+  first_name,
+  store.store_id,
+  rental.count,
+  payment.count
+  ]
   }
 
 }
