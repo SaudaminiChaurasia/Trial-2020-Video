@@ -25,7 +25,16 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
+access_grant: can_see_emails {
+  user_attribute: can_see_emails
+  allowed_values: ["yes"]
+}
+
 explore: rental {
+  access_filter: {
+    field: customer.store_id
+    user_attribute: storeid
+  }
   join: inventory {
     type: left_outer
     relationship: many_to_one
