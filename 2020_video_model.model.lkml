@@ -6,8 +6,15 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
-#
+#access_grant: access_grant_name {
+#user_attribute: user_attribute_name
+#allowed_values: [ "value_1", "value_2" , ... ]
+#}
 # explore: order_items {
+#access_filter: {
+#  field: fully_scoped_field
+#  user_attribute: user_attribute_name
+#}
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
