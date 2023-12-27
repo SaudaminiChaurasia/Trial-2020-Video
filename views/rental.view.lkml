@@ -89,7 +89,15 @@ view: rental {
   measure: late_return_rate {
     type: number
     value_format_name: percent_2
-    sql: ${total_late_returns}/${total_returns} ;;
+    sql: ${total_late_returns}/NULLIF(${total_returns},0) ;;
+    drill_fields: [detail*]
+  }
+
+  measure: percentage_returned_late {
+    type: number
+    sql: 1.0* ${total_late_returns}/NULLIF(${count}, 0);;
+    value_format_name: percent_1
+    drill_fields: [detail*]
   }
 
 
@@ -103,9 +111,9 @@ view: rental {
     fields: [
   rental_id,
   inventory.inventory_id,
-  customer.last_name,
   customer.customer_id,
   customer.first_name,
+  customer.last_name,
   payment.count
   ]
   }

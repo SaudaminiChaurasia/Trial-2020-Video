@@ -29,16 +29,19 @@ view: customer {
   measure: total_active {
     type: sum
     sql: ${active} ;;
+    drill_fields: [detail*]
   }
 
   measure: average_active {
     type: average
     sql: ${active} ;;
+    drill_fields: [detail*]
   }
 
   measure: total_inactive {
     type: number
     sql: ${count} - ${total_active} ;;
+    drill_fields: [detail*]
   }
 
   measure: customer_retention {
