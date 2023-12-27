@@ -68,7 +68,7 @@ view: customer {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
-    required_access_grants: [can_see_emails]
+    #required_access_grants: [can_see_emails]
   }
 
   dimension: first_name {
